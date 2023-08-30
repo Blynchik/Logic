@@ -18,14 +18,14 @@ public class FightRoundCalculator {
         System.out.println("Первым ходит " + attacker.getName() + ", a вторым - " + defender.getName());
 
         FightTurn fightTurn1 = new FightTurn(attacker, defender);
-        fightRound.setAttacker(fightTurn1.getAttacker());
-        fightRound.setDefender(fightTurn1.getDefender());
+        fightRound.setAttacker(new Fighter(fightTurn1.getAttacker()));
+        fightRound.setDefender(new Fighter(fightTurn1.getDefender()));
         fightRound.getTurns().add(fightTurn1);
 
         if (fightRound.getAttacker().getHealthPoint() > 0 && fightRound.getDefender().getHealthPoint() > 0) {
             FightTurn fightTurn2 = new FightTurn(fightRound.getDefender(), fightRound.getAttacker());
-            fightRound.setDefender(fightTurn2.getAttacker());
-            fightRound.setAttacker(fightTurn2.getDefender());
+            fightRound.setDefender(new Fighter(fightTurn2.getAttacker()));
+            fightRound.setAttacker(new Fighter(fightTurn2.getDefender()));
             fightRound.getTurns().add(fightTurn2);
         }
 

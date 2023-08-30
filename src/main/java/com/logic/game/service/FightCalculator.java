@@ -21,11 +21,11 @@ public class FightCalculator {
             Fighter defenderAfterRound = fightRound.getTurns().peek().getDefender();
 
             if(attackerAfterRound.getFighterId() == 1){
-                fight.setFighter1(attackerAfterRound);
-                fight.setFighter2(defenderAfterRound);
+                fight.setFighter1(new Fighter(attackerAfterRound));
+                fight.setFighter2(new Fighter(defenderAfterRound));
             } else if(attackerAfterRound.getFighterId() == 2){
-                fight.setFighter2(attackerAfterRound);
-                fight.setFighter1(defenderAfterRound);
+                fight.setFighter2(new Fighter(attackerAfterRound));
+                fight.setFighter1(new Fighter(defenderAfterRound));
             }
 
             Fighter winner = getWinner(fight.getFighter1(), fight.getFighter2());

@@ -28,12 +28,11 @@ public class TestController {
         for (FightRound fightRound : fight.getRounds()) {
             System.out.println("Раунд " + fightRound.getRoundNum());
             System.out.println("Первым ходит " + fightRound.getAttacker().getName() + ", a вторым - " + fightRound.getDefender().getName());
-            FightTurn currentTurn = null;
             for (FightTurn fightTurn : fightRound.getTurns()) {
-                currentTurn = fightTurn;
                 System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " с силой " + fightTurn.getAttack() + ". Но противник уклоняется на " + fightTurn.getEvasion() + " и поэтому получает всего " + fightTurn.getDamage() + " урона. ");
+                System.out.println("У " + fightTurn.getDefender().getName() + " остается " + fightTurn.getDefender().getHealthPoint() + " очков здоровья.");
             }
-            System.out.println(fightRound.getAttacker().getName() + " имеет " + currentTurn.getAttacker().getHealthPoint() + " очков здоровья, а " + fightRound.getDefender().getName() + " имеет " + currentTurn.getDefender().getHealthPoint());
+            System.out.println(fightRound.getAttacker().getName() + " имеет " + fightRound.getAttacker().getHealthPoint() + " очков здоровья, а " + fightRound.getDefender().getName() + " имеет " + fightRound.getDefender().getHealthPoint());
             System.out.println("======================");
         }
         System.out.println("Победил " + fight.getWinner().getName());
