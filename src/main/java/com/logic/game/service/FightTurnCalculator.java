@@ -21,7 +21,7 @@ public class FightTurnCalculator {
         Integer defenderHp = getDefenderHp(fightTurn.getDefender().getHealthPoint(), fightTurn.getDamage());
         fightTurn.getDefender().setHealthPoint(defenderHp);
 
-        System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " с силой " + attack + ". Но противник уклоняется на " + evasion + " и поэтому получает всего " + damage + " урона. " + fightTurn.getAttacker().getName() + " имеет " + attackerHp + " очков здоровья, а " + fightTurn.getDefender().getName() + " имеет " + defenderHp);
+//        System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " с силой " + attack + ". Но противник уклоняется на " + evasion + " и поэтому получает всего " + damage + " урона. " + fightTurn.getAttacker().getName() + " имеет " + attackerHp + " очков здоровья, а " + fightTurn.getDefender().getName() + " имеет " + defenderHp);
     }
 
     private static Integer getAttack(Integer minAttack, Integer maxAttack) {

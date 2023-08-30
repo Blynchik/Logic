@@ -17,6 +17,7 @@ public class Fighter {
     private Integer minEvasion;
     private Integer maxEvasion;
     private Integer healthPoint;
+    private Integer damageIgnore;
 
     public Fighter() {
     }

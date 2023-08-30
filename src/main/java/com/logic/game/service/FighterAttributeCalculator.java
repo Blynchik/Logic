@@ -17,6 +17,9 @@ public class FighterAttributeCalculator {
 
         Integer hp = getHealthPoint(fighter.getConstitution());
         fighter.setHealthPoint(hp);
+
+        Integer damageIgnore = getDamageIgnore(fighter.getConstitution());
+        fighter.setDamageIgnore(damageIgnore);
     }
 
     private static Integer getMinAttack(Integer strength) {
@@ -37,5 +40,9 @@ public class FighterAttributeCalculator {
 
     private static Integer getHealthPoint(Integer constitution) {
         return constitution;
+    }
+
+    private static Integer getDamageIgnore(Integer constitution){
+        return (int) (Math.ceil(constitution / 2.0));
     }
 }
