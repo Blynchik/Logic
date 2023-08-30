@@ -30,12 +30,18 @@ public class TestController {
 
         for (FightRound fightRound : fight.getRounds()) {
             System.out.println("Раунд " + fightRound.getRoundNum());
-            System.out.println("Первым ходит " + fightRound.getAttacker().getName() + ", a вторым - " + fightRound.getDefender().getName());
+            System.out.println("Первым ходит " + fightRound.getAttacker().getName() + ", a вторым - " +
+                    fightRound.getDefender().getName());
             for (FightTurn fightTurn : fightRound.getTurns()) {
-                System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " с силой " + fightTurn.getAttack() + ". Но противник уклоняется на " + fightTurn.getEvasion() + " и поэтому получает всего " + fightTurn.getDamage() + " урона. ");
+                System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() +
+                        " с силой " + fightTurn.getAttack() + ". Но противник уклоняется на " + fightTurn.getEvasion() +
+                        " и игнорирует " + fightTurn.getDamageIgnore() + " урона поэтому получает всего " + fightTurn.getDamage() +
+                        " урона. ");
                 System.out.println("У " + fightTurn.getDefender().getName() + " остается " + fightTurn.getDefender().getHealthPoint() + " очков здоровья.");
             }
-            System.out.println(fightRound.getAttacker().getName() + " имеет " + fightRound.getAttacker().getHealthPoint() + " очков здоровья, а " + fightRound.getDefender().getName() + " имеет " + fightRound.getDefender().getHealthPoint());
+            System.out.println(fightRound.getAttacker().getName() + " имеет " + fightRound.getAttacker().getHealthPoint() +
+                    " очков здоровья, а " + fightRound.getDefender().getName() +
+                    " имеет " + fightRound.getDefender().getHealthPoint());
             System.out.println("======================");
         }
         System.out.println("Победил " + fight.getWinner().getName());

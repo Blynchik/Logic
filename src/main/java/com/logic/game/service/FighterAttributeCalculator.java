@@ -43,6 +43,6 @@ public class FighterAttributeCalculator {
     }
 
     private static Integer getDamageIgnore(Integer constitution){
-        return (int) (Math.ceil(constitution / 2.0));
+        return (int) (Math.floor(constitution / 2.0));
     }
 }

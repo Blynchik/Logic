@@ -9,6 +9,7 @@ public class FightTurn {
     private Fighter defender;
     private Integer attack;
     private Integer evasion;
+    private Integer damageIgnore;
 
     private Integer damage;
 
