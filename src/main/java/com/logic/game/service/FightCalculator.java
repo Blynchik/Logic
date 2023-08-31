@@ -12,7 +12,7 @@ public class FightCalculator {
         fight.getFighter2().setFighterId(2);
 
         while (fight.getFighter1().getHealthPoint() > 0 && fight.getFighter2().getHealthPoint() > 0) {
-            System.out.println("Раунд " + round);
+//            System.out.println("Раунд " + round);
 
             FightRound fightRound = new FightRound(round, fight.getFighter1(), fight.getFighter2());
             fight.getRounds().add(fightRound);
@@ -36,7 +36,7 @@ public class FightCalculator {
 
             round++;
         }
-        System.out.println("Победил " + fight.getWinner().getName());
+//        System.out.println("Победил " + fight.getWinner().getName());
     }
 
     private static Fighter getWinner(Fighter fighter1, Fighter fighter2) {

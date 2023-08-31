@@ -12,7 +12,7 @@ public class FightTurnCalculator {
         fightTurn.setEvasion(evasion);
 
         if (fightTurn.getAttack() > fightTurn.getEvasion()) {
-            System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " и попадает.");
+//            System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " и попадает.");
 
             Integer damage = getDamage(fightTurn.getAttacker().getMinDamage(), fightTurn.getAttacker().getMaxDamage());
             fightTurn.setDamage(damage);
@@ -23,7 +23,7 @@ public class FightTurnCalculator {
             Integer realDamage = getRealDamage(fightTurn.getDamage(), fightTurn.getDamageIgnore());
             fightTurn.setRealDamage(realDamage);
         } else {
-            System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " и не попадает.");
+//            System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " и не попадает.");
 
             fightTurn.setDamageIgnore(0);
             fightTurn.setDamage(0);
@@ -36,12 +36,12 @@ public class FightTurnCalculator {
         Integer defenderHp = getDefenderHp(fightTurn.getDefender().getHealthPoint(), fightTurn.getRealDamage());
         fightTurn.getDefender().setHealthPoint(defenderHp);
 
-        System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " с силой " + fightTurn.getDamage());
-        System.out.println(fightTurn.getDefender().getName() + " игнорирует " + fightTurn.getDamageIgnore());
-        System.out.println(fightTurn.getDefender().getName() + " получает " + fightTurn.getRealDamage());
-        System.out.println("У " + fightTurn.getAttacker().getName() + "- " + fightTurn.getAttacker().getHealthPoint() + " хп");
-        System.out.println("У " + fightTurn.getDefender().getName() + "- " + fightTurn.getDefender().getHealthPoint() + " хп");
-        System.out.println();
+//        System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " с силой " + fightTurn.getDamage());
+//        System.out.println(fightTurn.getDefender().getName() + " игнорирует " + fightTurn.getDamageIgnore());
+//        System.out.println(fightTurn.getDefender().getName() + " получает " + fightTurn.getRealDamage());
+//        System.out.println("У " + fightTurn.getAttacker().getName() + "- " + fightTurn.getAttacker().getHealthPoint() + " хп");
+//        System.out.println("У " + fightTurn.getDefender().getName() + "- " + fightTurn.getDefender().getHealthPoint() + " хп");
+//        System.out.println();
     }
 
     private static Integer getAttack(Integer minAttack, Integer maxAttack) {

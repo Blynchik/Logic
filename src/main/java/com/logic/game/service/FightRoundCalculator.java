@@ -15,8 +15,8 @@ public class FightRoundCalculator {
         Fighter attacker = fightRound.getPriority().poll();
         Fighter defender = fightRound.getPriority().poll();
 
-        System.out.println("Инициатива " + attacker.getName() + "- " + fightRound.getAttackerInitiative() + ", а у " + defender.getName() + "- " + fightRound.getDefenderInitiative());
-        System.out.println("Первым ходит " + attacker.getName() + ", a вторым - " + defender.getName());
+//        System.out.println("Инициатива " + attacker.getName() + "- " + fightRound.getAttackerInitiative() + ", а у " + defender.getName() + "- " + fightRound.getDefenderInitiative());
+//        System.out.println("Первым ходит " + attacker.getName() + ", a вторым - " + defender.getName());
 
         FightTurn fightTurn1 = new FightTurn(attacker, defender);
         fightRound.setAttacker(new Fighter(fightTurn1.getAttacker()));
@@ -29,7 +29,7 @@ public class FightRoundCalculator {
             fightRound.setAttacker(new Fighter(fightTurn2.getDefender()));
             fightRound.getTurns().add(fightTurn2);
         }
-        System.out.println("======================");
+//        System.out.println("======================");
     }
 
     private static Queue<Fighter> getPriority(FightRound fightRound, Fighter fighter1, Fighter fighter2) {
