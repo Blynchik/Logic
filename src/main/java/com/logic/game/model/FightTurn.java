@@ -12,6 +12,7 @@ public class FightTurn {
     private Integer damageIgnore;
     private Integer realDamage;
     private Integer damage;
+    private Integer armor;
 
     public FightTurn(){}
 

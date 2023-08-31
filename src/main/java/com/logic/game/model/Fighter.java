@@ -29,6 +29,8 @@ public class Fighter {
     private Integer minDamage;
     private Integer maxDamage;
 
+    private Integer armor;
+
     public Fighter() {
     }
 
@@ -38,6 +40,7 @@ public class Fighter {
         this.strength = fighter.getStrength();
         this.dexterity = fighter.getDexterity();
         this.constitution = fighter.getDexterity();
+        this.armor = fighter.getArmor();
 
         FighterAttributeCalculator.setAttributes(this);
 
@@ -47,9 +50,12 @@ public class Fighter {
     public Fighter(String name, Integer strength,
                    Integer dexterity, Integer constitution){
         this.name = name;
+
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
+
+        this.armor = 0;
 
         FighterAttributeCalculator.setAttributes(this);
     }
@@ -67,5 +73,10 @@ public class Fighter {
     public void setConstitution(Integer constitution) {
         this.constitution = constitution;
         FighterAttributeCalculator.setAttributes(this);
+    }
+
+    public void setArmor(Integer armor) {
+        this.armor = armor;
+        this.setMaxEvasion(this.getMaxEvasion() - armor);
     }
 }

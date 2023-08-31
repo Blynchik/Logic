@@ -26,6 +26,9 @@ public class TestController {
         Fighter fighter1 = new Fighter(dataBaseClient.getHero(0));
         Fighter fighter2 = new Fighter(dataBaseClient.getEnemy(0));
 
+        fighter1.setArmor(0);
+        fighter2.setArmor(0);
+
         Fight fight = new Fight(fighter1, fighter2);
         System.out.println("++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++");
 
@@ -42,7 +45,7 @@ public class TestController {
 
                 if (fightTurn.getAttack() > fightTurn.getEvasion()) {
                     System.out.println("Поэтому " + fightTurn.getAttacker().getName() + " попадает, он наносит " + fightTurn.getDamage()
-                            + " урона, но противник игнорирует " + fightTurn.getDamageIgnore() + " и получает "
+                            + " урона, но противник игнорирует " + fightTurn.getDamageIgnore() + ", блокирует " + fightTurn.getArmor() + " и получает "
                             + fightTurn.getRealDamage() + " урона.");
                 } else {
                     System.out.println("Поэтому " + fightTurn.getAttacker().getName() + " промахивается.");

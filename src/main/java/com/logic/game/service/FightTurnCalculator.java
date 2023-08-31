@@ -11,7 +11,7 @@ public class FightTurnCalculator {
         Integer evasion = getEvasion(fightTurn.getDefender().getMinEvasion(), fightTurn.getDefender().getMaxEvasion());
         fightTurn.setEvasion(evasion);
 
-        if (fightTurn.getAttack() > fightTurn.getEvasion()) {
+        if (fightTurn.getAttack() >= fightTurn.getEvasion()) {
 //            System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " и попадает.");
 
             Integer damage = getDamage(fightTurn.getAttacker().getMinDamage(), fightTurn.getAttacker().getMaxDamage());
@@ -20,7 +20,10 @@ public class FightTurnCalculator {
             Integer damageIgnore = getDamageIgnore(fightTurn.getDefender().getMinDamageIgnore(), fightTurn.getDefender().getMaxDamageIgnore());
             fightTurn.setDamageIgnore(damageIgnore);
 
-            Integer realDamage = getRealDamage(fightTurn.getDamage(), fightTurn.getDamageIgnore());
+            Integer armor = getArmor(fightTurn.getDefender().getArmor());
+            fightTurn.setArmor(armor);
+
+            Integer realDamage = getRealDamage(fightTurn.getDamage(), fightTurn.getDamageIgnore(), fightTurn.getArmor());
             fightTurn.setRealDamage(realDamage);
         } else {
 //            System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " и не попадает.");
@@ -37,7 +40,7 @@ public class FightTurnCalculator {
         fightTurn.getDefender().setHealthPoint(defenderHp);
 
 //        System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() + " с силой " + fightTurn.getDamage());
-//        System.out.println(fightTurn.getDefender().getName() + " игнорирует " + fightTurn.getDamageIgnore());
+//        System.out.println(fightTurn.getDefender().getName() + " игнорирует " + fightTurn.getDamageIgnore() + " блокирует " + fightTurn.getArmor());
 //        System.out.println(fightTurn.getDefender().getName() + " получает " + fightTurn.getRealDamage());
 //        System.out.println("У " + fightTurn.getAttacker().getName() + "- " + fightTurn.getAttacker().getHealthPoint() + " хп");
 //        System.out.println("У " + fightTurn.getDefender().getName() + "- " + fightTurn.getDefender().getHealthPoint() + " хп");
@@ -56,8 +59,8 @@ public class FightTurnCalculator {
         return minDamage + (int) (Math.random() * (maxDamage - minDamage + 1));
     }
 
-    private static Integer getRealDamage(Integer damage, Integer damageIgnore) {
-        return Math.max(damage - damageIgnore, 0);
+    private static Integer getRealDamage(Integer damage, Integer damageIgnore, Integer armor) {
+        return Math.max(damage - armor - damageIgnore, 0);
     }
 
     private static Integer getAttackerHp(Integer attackerHp) {
@@ -70,5 +73,9 @@ public class FightTurnCalculator {
 
     private static Integer getDamageIgnore(Integer minDamageIgnore, Integer maxDamageIgnore) {
         return minDamageIgnore + (int) (Math.random() * (maxDamageIgnore - minDamageIgnore + 1));
+    }
+
+    private static Integer getArmor(Integer armor){
+        return armor;
     }
 }
