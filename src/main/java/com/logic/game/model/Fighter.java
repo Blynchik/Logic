@@ -50,7 +50,6 @@ public class Fighter {
     public Fighter(String name, Integer strength,
                    Integer dexterity, Integer constitution){
         this.name = name;
-
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
@@ -77,6 +76,6 @@ public class Fighter {
 
     public void setArmor(Integer armor) {
         this.armor = armor;
-        this.setMaxEvasion(this.getMaxEvasion() - armor);
+        this.setMaxEvasion(maxEvasion - armor);
     }
 }

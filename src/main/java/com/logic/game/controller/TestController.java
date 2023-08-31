@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,12 +22,12 @@ public class TestController {
     }
 
     @GetMapping("/fight/description")
-    public ResponseEntity<Fight> getFightDescription() {
+    public ResponseEntity<Fight> getFightDescription(@RequestParam(defaultValue = "0") Integer armor) {
 
         Fighter fighter1 = new Fighter(dataBaseClient.getHero(0));
         Fighter fighter2 = new Fighter(dataBaseClient.getEnemy(0));
 
-        fighter1.setArmor(0);
+        fighter1.setArmor(armor);
         fighter2.setArmor(0);
 
         Fight fight = new Fight(fighter1, fighter2);
@@ -43,7 +44,7 @@ public class TestController {
                         + fightTurn.getDefender().getName() + " с силой " + fightTurn.getAttack()
                         + ", а противник уклоняется на " + fightTurn.getEvasion());
 
-                if (fightTurn.getAttack() > fightTurn.getEvasion()) {
+                if (fightTurn.getAttack() >= fightTurn.getEvasion()) {
                     System.out.println("Поэтому " + fightTurn.getAttacker().getName() + " попадает, он наносит " + fightTurn.getDamage()
                             + " урона, но противник игнорирует " + fightTurn.getDamageIgnore() + ", блокирует " + fightTurn.getArmor() + " и получает "
                             + fightTurn.getRealDamage() + " урона.");
@@ -65,18 +66,24 @@ public class TestController {
     }
 
     @GetMapping("/fight/statistic")
-    public ResponseEntity<String> getStatisticsUsual() {
+    public ResponseEntity<String> getStatisticsUsual(@RequestParam(defaultValue = "100000") Integer tests,
+                                                     @RequestParam(defaultValue = "1") Integer bonus,
+                                                     @RequestParam(defaultValue = "0") Integer armor) {
 
         int wins = 0;
-        int tests = 100_000;
         int numRounds = 0;
 
         Fighter baseFighter1 = new Fighter("Usual", 5, 5, 5);
         Fighter baseFighter2 = new Fighter("Casual", 5, 5, 5);
 
+        baseFighter1.setArmor(armor);
+        baseFighter2.setArmor(0);
+
         for (int i = 0; i < tests; i++) {
             Fighter fighter1 = new Fighter(baseFighter1);
             Fighter fighter2 = new Fighter(baseFighter2);
+
+            fighter2.setArmor(fighter1.getArmor());
 
             Fight fight = new Fight(fighter1, fighter2);
 
@@ -94,7 +101,9 @@ public class TestController {
             Fighter fighter1 = new Fighter(baseFighter1);
             Fighter fighter2 = new Fighter(baseFighter2);
 
-            fighter1.setStrength(fighter1.getStrength() + 1);
+            fighter2.setArmor(fighter1.getArmor());
+
+            fighter1.setStrength(fighter1.getStrength() + bonus);
 
             Fight fight = new Fight(fighter1, fighter2);
 
@@ -112,7 +121,9 @@ public class TestController {
             Fighter fighter1 = new Fighter(baseFighter1);
             Fighter fighter2 = new Fighter(baseFighter2);
 
-            fighter1.setDexterity(fighter1.getDexterity() + 1);
+            fighter2.setArmor(fighter1.getArmor());
+
+            fighter1.setDexterity(fighter1.getDexterity() + bonus);
 
             Fight fight = new Fight(fighter1, fighter2);
 
@@ -130,7 +141,9 @@ public class TestController {
             Fighter fighter1 = new Fighter(baseFighter1);
             Fighter fighter2 = new Fighter(baseFighter2);
 
-            fighter1.setConstitution(fighter1.getConstitution() + 1);
+            fighter2.setArmor(fighter1.getArmor());
+
+            fighter1.setConstitution(fighter1.getConstitution() + bonus);
 
             Fight fight = new Fight(fighter1, fighter2);
 
@@ -148,8 +161,8 @@ public class TestController {
             Fighter fighter1 = new Fighter(baseFighter1);
             Fighter fighter2 = new Fighter(baseFighter2);
 
-            fighter1.setStrength(fighter1.getStrength() + 1);
-            fighter2.setDexterity(fighter2.getDexterity() + 1);
+            fighter1.setStrength(fighter1.getStrength() + bonus);
+            fighter2.setDexterity(fighter2.getDexterity() + bonus);
 
             Fight fight = new Fight(fighter1, fighter2);
 
@@ -167,8 +180,8 @@ public class TestController {
             Fighter fighter1 = new Fighter(baseFighter1);
             Fighter fighter2 = new Fighter(baseFighter2);
 
-            fighter1.setStrength(fighter1.getStrength() + 1);
-            fighter2.setConstitution(fighter2.getConstitution() + 1);
+            fighter1.setStrength(fighter1.getStrength() + bonus);
+            fighter2.setConstitution(fighter2.getConstitution() + bonus);
 
             Fight fight = new Fight(fighter1, fighter2);
 
@@ -186,8 +199,8 @@ public class TestController {
             Fighter fighter1 = new Fighter(baseFighter1);
             Fighter fighter2 = new Fighter(baseFighter2);
 
-            fighter1.setDexterity(fighter1.getDexterity() + 1);
-            fighter2.setConstitution(fighter1.getStrength() + 1);
+            fighter1.setDexterity(fighter1.getDexterity() + bonus);
+            fighter2.setConstitution(fighter1.getStrength() + bonus);
 
             Fight fight = new Fight(fighter1, fighter2);
 

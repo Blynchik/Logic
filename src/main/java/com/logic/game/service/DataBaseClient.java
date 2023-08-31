@@ -2,6 +2,7 @@ package com.logic.game.service;
 
 import com.logic.game.db.DataBase;
 import com.logic.game.model.Enemy;
+import com.logic.game.model.Fighter;
 import com.logic.game.model.Hero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -38,7 +38,7 @@ public class FighterAttributeCalculator {
     }
 
     private static Integer getMinAttack(Integer dexterity) {
-        return 0;
+        return (int) (dexterity - Math.ceil(dexterity / 2.0));
     }
 
     private static Integer getMaxAttack(Integer dexterity) {
@@ -46,7 +46,7 @@ public class FighterAttributeCalculator {
     }
 
     private static Integer getMinEvasion(Integer dexterity) {
-        return 0;
+        return (int) (dexterity - Math.ceil(dexterity / 2.0));
     }
 
     private static Integer getMaxEvasion(Integer dexterity) {
@@ -58,11 +58,11 @@ public class FighterAttributeCalculator {
     }
 
     private static Integer getMinDamageIgnore(Integer constitution) {
-        return (int) (constitution - Math.ceil(constitution / 2.0));
+        return 0;
     }
 
     private static Integer getMaxDamageIgnore(Integer constitution) {
-        return (int) (constitution + Math.floor(constitution / 2.0));
+        return (int) (Math.floor(constitution / 2.0));
     }
 
     private static Integer getMinInitiative(Integer dexterity) {
@@ -84,16 +84,4 @@ public class FighterAttributeCalculator {
     private static Integer getArmor(Integer armor) {
         return armor;
     }
-
-//    private static Integer getConstitutionBonus(Integer constitution) {
-//        return (int) (constitution - Math.floor(constitution / 2.0));
-//    }
-//
-//    private static Integer getStrengthBonus(Integer strength) {
-//        return (int) (strength - Math.floor(strength / 2.0));
-//    }
-//
-//    private static Integer getDexterityBonus(Integer dexterity) {
-//        return (int) (dexterity - Math.floor(dexterity / 2.0));
-//    }
 }
