@@ -10,7 +10,7 @@ public class FightTurn {
     private Integer attack;
     private Integer evasion;
     private Integer damageIgnore;
-
+    private Integer realDamage;
     private Integer damage;
 
     public FightTurn(){}

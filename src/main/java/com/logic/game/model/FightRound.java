@@ -15,6 +15,8 @@ public class FightRound {
     private Fighter attacker;
     private Fighter defender;
     private Queue<Fighter> priority;
+    private Integer attackerInitiative;
+    private Integer defenderInitiative;
 
     public FightRound(){}
 

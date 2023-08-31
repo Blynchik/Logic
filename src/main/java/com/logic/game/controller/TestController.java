@@ -2,6 +2,7 @@ package com.logic.game.controller;
 
 import com.logic.game.model.*;
 import com.logic.game.service.DataBaseClient;
+import com.logic.game.service.FighterAttributeCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,23 +29,23 @@ public class TestController {
         Fight fight = new Fight(fighter1, fighter2);
         System.out.println("++++++++++++++++++++++++++++++\n+++++++++++++++++++++++++++++++++");
 
-        for (FightRound fightRound : fight.getRounds()) {
-            System.out.println("Раунд " + fightRound.getRoundNum());
-            System.out.println("Первым ходит " + fightRound.getAttacker().getName() + ", a вторым - " +
-                    fightRound.getDefender().getName());
-            for (FightTurn fightTurn : fightRound.getTurns()) {
-                System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() +
-                        " с силой " + fightTurn.getAttack() + ". Но противник уклоняется на " + fightTurn.getEvasion() +
-                        " и игнорирует " + fightTurn.getDamageIgnore() + " урона поэтому получает всего " + fightTurn.getDamage() +
-                        " урона. ");
-                System.out.println("У " + fightTurn.getDefender().getName() + " остается " + fightTurn.getDefender().getHealthPoint() + " очков здоровья.");
-            }
-            System.out.println(fightRound.getAttacker().getName() + " имеет " + fightRound.getAttacker().getHealthPoint() +
-                    " очков здоровья, а " + fightRound.getDefender().getName() +
-                    " имеет " + fightRound.getDefender().getHealthPoint());
-            System.out.println("======================");
-        }
-        System.out.println("Победил " + fight.getWinner().getName());
+//        for (FightRound fightRound : fight.getRounds()) {
+//            System.out.println("Раунд " + fightRound.getRoundNum());
+//            System.out.println("Первым ходит " + fightRound.getAttacker().getName() + ", a вторым - " +
+//                    fightRound.getDefender().getName());
+//            for (FightTurn fightTurn : fightRound.getTurns()) {
+//                System.out.println(fightTurn.getAttacker().getName() + " атакует " + fightTurn.getDefender().getName() +
+//                        " с силой " + fightTurn.getAttack() + ". Но противник уклоняется на " + fightTurn.getEvasion() +
+//                        " и игнорирует " + fightTurn.getDamageIgnore() + " урона, поэтому получает всего " + fightTurn.getDamage() +
+//                        " урона. ");
+//                System.out.println("У " + fightTurn.getDefender().getName() + " остается " + fightTurn.getDefender().getHealthPoint() + " очков здоровья.");
+//            }
+//            System.out.println(fightRound.getAttacker().getName() + " имеет " + fightRound.getAttacker().getHealthPoint() +
+//                    " очков здоровья, а " + fightRound.getDefender().getName() +
+//                    " имеет " + fightRound.getDefender().getHealthPoint());
+//            System.out.println("======================");
+//        }
+//        System.out.println("Победил " + fight.getWinner().getName());
 
         return ResponseEntity.ok(fight);
     }
@@ -55,10 +56,16 @@ public class TestController {
         int wins = 0;
         int tests = 100_000;
         int numRounds = 0;
+
+        Fighter baseFighter1 = new Fighter("Usual", 5, 5, 5);
+        Fighter baseFighter2 = new Fighter("Casual" , 5, 5 ,5);
+
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter("Usual", 5, 5, 5);
-            Fighter fighter2 = new Fighter(dataBaseClient.getEnemy(0));
+            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter2 = new Fighter(baseFighter2);
+
             Fight fight = new Fight(fighter1, fighter2);
+
             if (fight.getWinner().getName().equals(fighter1.getName())) {
                 wins++;
             }
@@ -70,9 +77,13 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter("Usual", 6, 5, 5);
-            Fighter fighter2 = new Fighter(dataBaseClient.getEnemy(0));
+            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter2 = new Fighter(baseFighter2);
+
+            fighter1.setStrength(fighter1.getStrength() + 1);
+
             Fight fight = new Fight(fighter1, fighter2);
+
             if (fight.getWinner().getName().equals(fighter1.getName())) {
                 wins++;
             }
@@ -84,9 +95,13 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter("Usual", 5, 6, 5);
-            Fighter fighter2 = new Fighter(dataBaseClient.getEnemy(0));
+            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter2 = new Fighter(baseFighter2);
+
+            fighter1.setDexterity(fighter1.getDexterity() + 1);
+
             Fight fight = new Fight(fighter1, fighter2);
+
             if (fight.getWinner().getName().equals(fighter1.getName())) {
                 wins++;
             }
@@ -98,9 +113,13 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter("Usual", 5, 5, 6);
-            Fighter fighter2 = new Fighter(dataBaseClient.getEnemy(0));
+            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter2 = new Fighter(baseFighter2);
+
+            fighter1.setConstitution(fighter1.getConstitution() + 1);
+
             Fight fight = new Fight(fighter1, fighter2);
+
             if (fight.getWinner().getName().equals(fighter1.getName())) {
                 wins++;
             }
@@ -112,9 +131,14 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter("Usual", 6, 5, 5);
-            Fighter fighter2 = new Fighter("Casual", 5, 6, 5);
+            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter2 = new Fighter(baseFighter2);
+
+            fighter1.setStrength(fighter1.getStrength() + 1);
+            fighter2.setDexterity(fighter2.getDexterity() + 1);
+
             Fight fight = new Fight(fighter1, fighter2);
+
             if (fight.getWinner().getName().equals(fighter1.getName())) {
                 wins++;
             }
@@ -126,9 +150,14 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter("Usual", 6, 5, 5);
-            Fighter fighter2 = new Fighter("Casual", 5, 5, 6);
+            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter2 = new Fighter(baseFighter2);
+
+            fighter1.setStrength(fighter1.getStrength() + 1);
+            fighter2.setConstitution(fighter2.getConstitution() + 1);
+
             Fight fight = new Fight(fighter1, fighter2);
+
             if (fight.getWinner().getName().equals(fighter1.getName())) {
                 wins++;
             }
@@ -140,9 +169,14 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter("Usual", 5, 6, 5);
-            Fighter fighter2 = new Fighter("Casual", 5, 5, 6);
+            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter2 = new Fighter(baseFighter2);
+
+            fighter1.setDexterity(fighter1.getDexterity() + 1);
+            fighter2.setConstitution(fighter1.getStrength() + 1);
+
             Fight fight = new Fight(fighter1, fighter2);
+
             if (fight.getWinner().getName().equals(fighter1.getName())) {
                 wins++;
             }

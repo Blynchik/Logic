@@ -14,10 +14,20 @@ public class Fighter {
 
     private Integer minAttack;
     private Integer maxAttack;
+
     private Integer minEvasion;
     private Integer maxEvasion;
+
     private Integer healthPoint;
-    private Integer damageIgnore;
+
+    private Integer minDamageIgnore;
+    private Integer maxDamageIgnore;
+
+    private Integer minInitiative;
+    private Integer maxInitiative;
+
+    private Integer minDamage;
+    private Integer maxDamage;
 
     public Fighter() {
     }
@@ -41,6 +51,21 @@ public class Fighter {
         this.dexterity = dexterity;
         this.constitution = constitution;
 
+        FighterAttributeCalculator.setAttributes(this);
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+        FighterAttributeCalculator.setAttributes(this);
+    }
+
+    public void setDexterity(Integer dexterity) {
+        this.dexterity = dexterity;
+        FighterAttributeCalculator.setAttributes(this);
+    }
+
+    public void setConstitution(Integer constitution) {
+        this.constitution = constitution;
         FighterAttributeCalculator.setAttributes(this);
     }
 }
