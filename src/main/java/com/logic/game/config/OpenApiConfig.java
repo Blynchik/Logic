@@ -10,7 +10,7 @@ public class OpenApiConfig {
     @Bean
     public GroupedOpenApi api() {
         return GroupedOpenApi.builder()
-                .group("Game API")
+                .group("Logic API")
                 .pathsToMatch("/api/**")
                 .build();
     }
