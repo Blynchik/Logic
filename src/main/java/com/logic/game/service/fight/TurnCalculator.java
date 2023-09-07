@@ -65,11 +65,11 @@ public class TurnCalculator {
         this.attack = throwValue.throwAttack(this.turnAttacker.getAttributes().getMinAttack(),
                 this.turnAttacker.getAttributes().getMaxAttack());
 
-        this.evasion = throwValue.throwAttack(this.turnDefender.getAttributes().getMinAttack(),
-                this.turnDefender.getAttributes().getMaxAttack());
+        this.evasion = throwValue.throwEvasion(this.turnDefender.getAttributes().getMinEvasion(),
+                this.turnDefender.getAttributes().getMaxEvasion());
 
 //        System.out.printf("%s атакует - %d, а %s уворачивается - %d\n", this.turnAttacker.getName(), attack, this.turnDefender.getName(), evasion);
-        return attack >= evasion;
+        return attack > evasion;
     }
 
     private void getRealDamage(){

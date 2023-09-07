@@ -33,7 +33,6 @@ public class RoundCalculator {
         Queue<Turn> turns = new LinkedList<>();
 
         throwInitiative(fighter1, fighter2);
-        determineAttackerAndDefender(this.attackerInitiative, this.defenderInitiative, fighter1, fighter2);
 
         Turn turn1 = turnCalculator.calculate(this.attacker, this.defender);
         turns.add(turn1);
@@ -65,28 +64,19 @@ public class RoundCalculator {
             if (fighter1Initiative > fighter2Initiative) {
                 this.attackerInitiative = fighter1Initiative;
                 this.defenderInitiative = fighter2Initiative;
+                this.attacker = fighter1;
+                this.defender = fighter2;
             } else {
                 this.attackerInitiative = fighter2Initiative;
                 this.defenderInitiative = fighter1Initiative;
+                this.attacker = fighter2;
+                this.defender = fighter1;
             }
-
+            attacker.setIsAttacker(true);
+            defender.setIsAttacker(false);
+            //        System.out.printf("Атакующий %s, защищающийся %s\n", attacker.getName(), defender.getName());
         } while (this.attackerInitiative.equals(this.defenderInitiative));
 //        System.out.printf("Инициатива %s - %d, а %s - %d\n", fighter1.getName(), attackerInitiative, fighter2.getName(), defenderInitiative);
-    }
-
-    private void determineAttackerAndDefender(Integer fighter1Initiative, Integer fighter2Initiative,
-                                              Fighter fighter1, Fighter fighter2) {
-        if (fighter1Initiative > fighter2Initiative) {
-            this.attacker = fighter1;
-            this.defender = fighter2;
-        } else {
-            this.attacker = fighter2;
-            this.defender = fighter1;
-        }
-
-        attacker.setIsAttacker(true);
-        defender.setIsAttacker(false);
-//        System.out.printf("Атакующий %s, защищающийся %s\n", attacker.getName(), defender.getName());
     }
 
     private void firstTurnUpdate(Turn turn) {
