@@ -2,18 +2,16 @@ package com.logic.game.service.fight;
 
 import com.logic.game.model.fight.Turn;
 import com.logic.game.model.fighter.Fighter;
-import com.logic.game.service.RealDamageCalculator;
+import com.logic.game.service.RealDamageAndCurrentHpCalculator;
 import com.logic.game.service.Throw;
-import com.logic.game.service.fighter.AttributeCalculator;
 import com.logic.game.service.fighter.FighterCalculator;
-import com.logic.game.service.fighter.FighterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TurnCalculator {
     private final Throw throwValue;
-    private final RealDamageCalculator realDamageCalculator;
+    private final RealDamageAndCurrentHpCalculator realDamageAndCurrentHpCalculator;
     private final FighterCalculator fighterCalculator;
     private Fighter turnAttacker;
     private Fighter turnDefender;
@@ -25,10 +23,10 @@ public class TurnCalculator {
 
     @Autowired
     public TurnCalculator(Throw throwValue,
-                          RealDamageCalculator realDamageCalculator,
+                          RealDamageAndCurrentHpCalculator realDamageAndCurrentHpCalculator,
                           FighterCalculator fighterCalculator) {
         this.throwValue = throwValue;
-        this.realDamageCalculator = realDamageCalculator;
+        this.realDamageAndCurrentHpCalculator = realDamageAndCurrentHpCalculator;
         this.fighterCalculator = fighterCalculator;
 
     }
@@ -86,7 +84,7 @@ public class TurnCalculator {
         this.damageIgnore = throwValue.throwDamageIgnore(this.turnDefender.getAttributes().getMinDamageIgnore(),
                 this.turnDefender.getAttributes().getMaxDamageIgnore());
 
-        this.realDamage = realDamageCalculator.getRealDamage(this.damage, this.damageIgnore, 0);
+        this.realDamage = realDamageAndCurrentHpCalculator.getRealDamage(this.damage, this.damageIgnore, 0);
 //        System.out.printf("Наносится урона %d, игнорируется %d, всего %d\n", this.damage, this.damageIgnore, this.realDamage);
     }
 }

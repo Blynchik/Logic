@@ -51,8 +51,8 @@ public class TestController {
                         t.getAttack(), t.getTurnDefender().getName(), t.getEvasion());
                 System.out.printf("Наносится урона %d, игнорируется %d, всего %d\n", t.getDamage(), t.getDamageIgnore(), t.getRealDamage());
                 System.out.printf("Остается у %s - %d, а у противника - %d\n\n",t.getTurnAttacker().getName(),
-                        t.getTurnAttacker().getAttributes().getCurrentHp(),
-                        t.getTurnDefender().getAttributes().getCurrentHp());
+                        t.getTurnAttacker().getCurrentHp(),
+                        t.getTurnDefender().getCurrentHp());
             }
         }
         System.out.printf("Победил %s, проиграл %s\n", fight.getWinner().getName(), fight.getLoser().getName());

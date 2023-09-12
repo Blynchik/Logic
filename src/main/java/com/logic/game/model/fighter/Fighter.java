@@ -13,27 +13,32 @@ public class Fighter {
     private Attributes attributes;
     private String description;
     private Boolean isAttacker;
+    private Integer currentHp;
 
     public Fighter(String name,
                    String surname,
                    AppUser appUser,
                    Characteristics characteristics,
-                   Attributes attributes){
+                   Attributes attributes,
+                   Integer currentHp){
         this.name = name;
         this.surname = surname;
         this.appUser = appUser;
         this.characteristics = characteristics;
         this.attributes = attributes;
+        this.currentHp = currentHp;
     }
 
     public Fighter(String name,
                    Characteristics characteristics,
                    Attributes attributes,
-                   String description){
+                   String description,
+                   Integer currentHp){
         this.name = name;
         this.characteristics = characteristics;
         this.attributes = attributes;
         this.description = description;
+        this.currentHp = currentHp;
     }
 
     public Fighter(Fighter fighter){
@@ -44,9 +49,13 @@ public class Fighter {
         this.attributes = new Attributes(fighter.getAttributes());
         this.description = fighter.getDescription();
         this.isAttacker = fighter.getIsAttacker();
+        this.currentHp = fighter.getCurrentHp();
     }
 
-    public Fighter (Fighter fighter, Characteristics characteristics, Attributes attributes){
+    public Fighter (Fighter fighter,
+                    Characteristics characteristics,
+                    Attributes attributes,
+                    Integer currentHp){
         this.name = fighter.getName();
         this.surname = fighter.getSurname();
         this.appUser = fighter.getAppUser();
@@ -54,5 +63,19 @@ public class Fighter {
         this.attributes = attributes;
         this.description = fighter.getDescription();
         this.isAttacker = fighter.getIsAttacker();
+        this.currentHp = currentHp;
+    }
+
+    public Fighter(Fighter fighter,
+                   Characteristics characteristics,
+                   Attributes attributes){
+        this.name = fighter.getName();
+        this.surname = fighter.getSurname();
+        this.appUser = fighter.getAppUser();
+        this.characteristics = characteristics;
+        this.attributes = attributes;
+        this.description = fighter.getDescription();
+        this.isAttacker = fighter.getIsAttacker();
+        this.currentHp = fighter.getCurrentHp();
     }
 }

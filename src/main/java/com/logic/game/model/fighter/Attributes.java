@@ -17,7 +17,6 @@ public class Attributes {
     private Integer minDamage;
     private Integer maxDamage;
     private Integer maxHp;
-    private Integer currentHp;
     private Integer xpAward;
 
     public Attributes(Attributes attributes){
@@ -32,7 +31,6 @@ public class Attributes {
         this.minDamage = attributes.getMinDamage();
         this.maxDamage = attributes.getMaxDamage();
         this.maxHp = attributes.getMaxHp();
-        this.currentHp = attributes.getCurrentHp();
         this.xpAward = attributes.getXpAward();
     }
 }

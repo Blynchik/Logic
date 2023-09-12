@@ -22,7 +22,6 @@ public class AttributeCalculator {
                 getMinDamage(hero.getStrength()),
                 getMaxDamage(hero.getStrength()),
                 getMaxHp(hero.getConstitution()),
-                getCurrentHp(hero.getCurrentHp(), hero.getConstitution()),
                 getXpAward());
     }
 
@@ -38,7 +37,6 @@ public class AttributeCalculator {
                 getMinDamage(enemy.getStrength()),
                 getMaxDamage(enemy.getStrength()),
                 getMaxHp(enemy.getConstitution()),
-                getCurrentHp(null, enemy.getConstitution()),
                 getXpAward());
     }
 
@@ -54,11 +52,10 @@ public class AttributeCalculator {
                 getMinDamage(fighter.getCharacteristics().getStrength()),
                 getMaxDamage(fighter.getCharacteristics().getStrength()),
                 getMaxHp(fighter.getCharacteristics().getConstitution()),
-                getCurrentHp(fighter.getAttributes().getCurrentHp(), fighter.getCharacteristics().getConstitution()),
                 getXpAward());
     }
 
-    public Attributes getAttributes(Characteristics characteristics, Integer currentHp){
+    public Attributes getAttributes(Characteristics characteristics){
         return new Attributes(getMinAttack(characteristics.getDexterity()),
                 getMaxAttack(characteristics.getDexterity()),
                 getMinEvasion(characteristics.getDexterity()),
@@ -70,23 +67,6 @@ public class AttributeCalculator {
                 getMinDamage(characteristics.getStrength()),
                 getMaxDamage(characteristics.getStrength()),
                 getMaxHp(characteristics.getConstitution()),
-                getCurrentHp(currentHp, characteristics.getConstitution()),
-                getXpAward());
-    }
-
-    public Attributes getAttributesWithUpdatedHp(Characteristics characteristics, Integer currentHp, Integer realDamage){
-        return new Attributes(getMinAttack(characteristics.getDexterity()),
-                getMaxAttack(characteristics.getDexterity()),
-                getMinEvasion(characteristics.getDexterity()),
-                getMaxEvasion(characteristics.getDexterity()),
-                getMinDamageIgnore(characteristics.getConstitution()),
-                getMaxDamageIgnore(characteristics.getConstitution()),
-                getMinInitiative(characteristics.getDexterity()),
-                getMaxInitiative(characteristics.getDexterity()),
-                getMinDamage(characteristics.getStrength()),
-                getMaxDamage(characteristics.getStrength()),
-                getMaxHp(characteristics.getConstitution()),
-                getCurrentHp(currentHp,realDamage, characteristics.getConstitution()),
                 getXpAward());
     }
 
@@ -132,17 +112,6 @@ public class AttributeCalculator {
 
     private Integer getMaxHp(Integer constitution) {
         return 2 * constitution;
-    }
-
-    private Integer getCurrentHp(Integer currentHp, Integer realDamage, Integer constitution) {
-        return currentHp - realDamage;
-    }
-
-    private Integer getCurrentHp(Integer currentHp, Integer constitution){
-        if(currentHp == null){
-            return getMaxHp(constitution);
-        }
-        return currentHp;
     }
 
     private Integer getXpAward() {

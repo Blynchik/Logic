@@ -38,8 +38,8 @@ public class RoundCalculator {
         turns.add(turn1);
         firstTurnUpdate(turn1);
 
-        if (this.attacker.getAttributes().getCurrentHp() > 0 &&
-                this.defender.getAttributes().getCurrentHp() > 0) {
+        if (this.attacker.getCurrentHp() > 0 &&
+                this.defender.getCurrentHp() > 0) {
             Turn turn2 = this.turnCalculator.calculate(this.defender, this.attacker);
             turns.add(turn2);
             secondTurnUpdate(turn2);

@@ -5,6 +5,7 @@ import com.logic.game.model.db.Hero;
 import com.logic.game.model.fighter.Attributes;
 import com.logic.game.model.fighter.Characteristics;
 import com.logic.game.model.fighter.Fighter;
+import com.logic.game.service.RealDamageAndCurrentHpCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +13,15 @@ import org.springframework.stereotype.Component;
 public class FighterCalculator {
     private final CharacteristicCalculator characteristicCalculator;
     private final AttributeCalculator attributeCalculator;
+    private final RealDamageAndCurrentHpCalculator realDamageAndCurrentHpCalculator;
 
     @Autowired
     public FighterCalculator(CharacteristicCalculator characteristicCalculator,
-                             AttributeCalculator attributeCalculator) {
+                             AttributeCalculator attributeCalculator,
+                             RealDamageAndCurrentHpCalculator realDamageAndCurrentHpCalculator) {
         this.characteristicCalculator = characteristicCalculator;
         this.attributeCalculator = attributeCalculator;
+        this.realDamageAndCurrentHpCalculator = realDamageAndCurrentHpCalculator;
     }
 
     public Fighter map(Hero hero) {
@@ -27,7 +31,8 @@ public class FighterCalculator {
                 hero.getSurname(),
                 hero.getAppUser(),
                 characteristics,
-                attributes);
+                attributes,
+                hero.getCurrentHp());
     }
 
     public Fighter map(Enemy enemy) {
@@ -36,21 +41,22 @@ public class FighterCalculator {
         return new Fighter(enemy.getName(),
                 characteristics,
                 attributes,
-                enemy.getDescription());
+                enemy.getDescription(),
+                attributes.getMaxHp());
     }
 
     public Fighter getWithNewCharacteristics(Fighter fighter, Characteristics characteristics) {
-        Attributes attributes = attributeCalculator.getAttributes(characteristics, fighter.getAttributes().getCurrentHp());
+        Attributes attributes = attributeCalculator.getAttributes(characteristics);
         return new Fighter(fighter,
                 characteristics,
                 attributes);
     }
 
     public Fighter getWithUpdatedHp(Fighter fighter, Integer realDamage) {
-        Attributes attributes = attributeCalculator.getAttributesWithUpdatedHp(fighter.getCharacteristics(),
-                fighter.getAttributes().getCurrentHp(), realDamage);
+        Integer currentHp = realDamageAndCurrentHpCalculator.getCurrentHp(fighter.getCurrentHp(), realDamage);
         return new Fighter(fighter,
                 fighter.getCharacteristics(),
-                attributes);
+                fighter.getAttributes(),
+                currentHp);
     }
 }

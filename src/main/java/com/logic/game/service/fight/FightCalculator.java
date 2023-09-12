@@ -28,8 +28,8 @@ public class FightCalculator {
         Queue<Round> rounds = new LinkedList<>();
         Integer roundNum = 1;
 
-        while (this.currentFighter1.getAttributes().getCurrentHp() > 0 &&
-                this.currentFighter2.getAttributes().getCurrentHp() > 0) {
+        while (this.currentFighter1.getCurrentHp() > 0 &&
+                this.currentFighter2.getCurrentHp() > 0) {
 //            System.out.printf("\nРаунд %d\n", roundNum);
             Round round = roundCalculator.calculate(roundNum, this.currentFighter1, this.currentFighter2);
             rounds.add(round);
@@ -58,10 +58,10 @@ public class FightCalculator {
     }
 
     private void getWinnerAndLoser() {
-        if (this.currentFighter1.getAttributes().getCurrentHp() <= 0) {
+        if (this.currentFighter1.getCurrentHp() <= 0) {
             this.winner = this.currentFighter2;
             this.loser = this.currentFighter1;
-        } else if (this.currentFighter2.getAttributes().getCurrentHp() <= 0) {
+        } else if (this.currentFighter2.getCurrentHp() <= 0) {
             this.winner = this.currentFighter1;
             this.loser = this.currentFighter2;
         }
