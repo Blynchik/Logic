@@ -74,7 +74,7 @@ public class AttributeCalculator {
                 getXpAward());
     }
 
-    public Attributes getUpdatedAttributes(Characteristics characteristics, Integer currentHp, Integer realDamage){
+    public Attributes getAttributesWithUpdatedHp(Characteristics characteristics, Integer currentHp, Integer realDamage){
         return new Attributes(getMinAttack(characteristics.getDexterity()),
                 getMaxAttack(characteristics.getDexterity()),
                 getMinEvasion(characteristics.getDexterity()),
@@ -135,9 +135,6 @@ public class AttributeCalculator {
     }
 
     private Integer getCurrentHp(Integer currentHp, Integer realDamage, Integer constitution) {
-        if (currentHp == null) {
-            return getMaxHp(constitution);
-        }
         return currentHp - realDamage;
     }
 

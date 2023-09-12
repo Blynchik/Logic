@@ -88,7 +88,7 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
+            Fighter fighter1 = fighterService.getWithNewCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
             Fighter fighter2 = new Fighter(baseFighter2);
 
             Fight fight = fightService.start(fighter1, fighter2);
@@ -104,7 +104,7 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5, 5 + bonus, 5));
+            Fighter fighter1 = fighterService.getWithNewCharacteristics(baseFighter1, new Characteristics(5, 5 + bonus, 5));
             Fighter fighter2 = new Fighter(baseFighter2);
 
             Fight fight = fightService.start(fighter1, fighter2);
@@ -120,7 +120,7 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5, 5, 5 + bonus));
+            Fighter fighter1 = fighterService.getWithNewCharacteristics(baseFighter1, new Characteristics(5, 5, 5 + bonus));
             Fighter fighter2 = new Fighter(baseFighter2);
 
             Fight fight = fightService.start(fighter1, fighter2);
@@ -136,8 +136,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
-            Fighter fighter2 = fighterService.getByCharacteristics(baseFighter2, new Characteristics(5, 5 + bonus, 5));
+            Fighter fighter1 = fighterService.getWithNewCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
+            Fighter fighter2 = fighterService.getWithNewCharacteristics(baseFighter2, new Characteristics(5, 5 + bonus, 5));
 
             Fight fight = fightService.start(fighter1, fighter2);
 
@@ -152,8 +152,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
-            Fighter fighter2 = fighterService.getByCharacteristics(baseFighter2, new Characteristics(5, 5, 5 + bonus));
+            Fighter fighter1 = fighterService.getWithNewCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
+            Fighter fighter2 = fighterService.getWithNewCharacteristics(baseFighter2, new Characteristics(5, 5, 5 + bonus));
 
             Fight fight = fightService.start(fighter1, fighter2);
 
@@ -168,8 +168,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5, 5 + bonus, 5));
-            Fighter fighter2 = fighterService.getByCharacteristics(baseFighter2, new Characteristics(5 , 5, 5 + bonus));
+            Fighter fighter1 = fighterService.getWithNewCharacteristics(baseFighter1, new Characteristics(5, 5 + bonus, 5));
+            Fighter fighter2 = fighterService.getWithNewCharacteristics(baseFighter2, new Characteristics(5 , 5, 5 + bonus));
 
             Fight fight = fightService.start(fighter1, fighter2);
 

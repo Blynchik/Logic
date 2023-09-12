@@ -39,18 +39,18 @@ public class FighterCalculator {
                 enemy.getDescription());
     }
 
-    public Fighter update(Fighter fighter, Integer realDamage) {
-        Characteristics characteristics = characteristicCalculator.getCharacteristics(fighter);
-        Attributes attributes = attributeCalculator.getUpdatedAttributes(characteristics, fighter.getAttributes().getCurrentHp(), realDamage);
+    public Fighter getWithNewCharacteristics(Fighter fighter, Characteristics characteristics) {
+        Attributes attributes = attributeCalculator.getAttributes(characteristics, fighter.getAttributes().getCurrentHp());
         return new Fighter(fighter,
                 characteristics,
                 attributes);
     }
 
-    public Fighter getByCharacteristics(Fighter fighter, Characteristics characteristics){
-        Attributes attributes = attributeCalculator.getAttributes(characteristics, fighter.getAttributes().getCurrentHp());
+    public Fighter getWithUpdatedHp(Fighter fighter, Integer realDamage) {
+        Attributes attributes = attributeCalculator.getAttributesWithUpdatedHp(fighter.getCharacteristics(),
+                fighter.getAttributes().getCurrentHp(), realDamage);
         return new Fighter(fighter,
-                characteristics,
+                fighter.getCharacteristics(),
                 attributes);
     }
 }

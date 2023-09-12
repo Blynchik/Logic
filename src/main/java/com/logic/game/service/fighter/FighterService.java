@@ -34,11 +34,11 @@ public class FighterService {
         return fighterCalculator.map(enemy);
     }
 
-    public Fighter getUpdated(Fighter fighter, Integer realDamage){
-        return fighterCalculator.update(fighter, realDamage);
+    public Fighter getWithNewCharacteristics(Fighter fighter, Characteristics characteristics){
+        return fighterCalculator.getWithNewCharacteristics(fighter, characteristics);
     }
 
-    public Fighter getByCharacteristics(Fighter fighter, Characteristics characteristics){
-        return fighterCalculator.getByCharacteristics(fighter, characteristics);
+    public Fighter getWithUpdatedHp(Fighter fighter, Integer realDamage){
+        return fighterCalculator.getWithUpdatedHp(fighter, realDamage);
     }
 }
