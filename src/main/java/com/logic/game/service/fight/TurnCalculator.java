@@ -2,15 +2,17 @@ package com.logic.game.service.fight;
 
 import com.logic.game.model.fight.Turn;
 import com.logic.game.model.fighter.Fighter;
-import com.logic.game.service.HpAndRealDamageCalculator;
+import com.logic.game.service.RealDamageCalculator;
 import com.logic.game.service.Throw;
+import com.logic.game.service.fighter.FighterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TurnCalculator {
     private final Throw throwValue;
-    private final HpAndRealDamageCalculator hpAndRealDamageCalculator;
+    private final RealDamageCalculator realDamageCalculator;
+    private final FighterService fighterService;
     private Fighter turnAttacker;
     private Fighter turnDefender;
     private Integer attack;
@@ -21,14 +23,17 @@ public class TurnCalculator {
 
     @Autowired
     public TurnCalculator(Throw throwValue,
-                          HpAndRealDamageCalculator hpAndRealDamageCalculator) {
+                          RealDamageCalculator realDamageCalculator,
+                          FighterService fighterService) {
         this.throwValue = throwValue;
-        this.hpAndRealDamageCalculator = hpAndRealDamageCalculator;
+        this.realDamageCalculator = realDamageCalculator;
+        this.fighterService = fighterService;
+
     }
 
     public Turn calculate(Fighter turnAttacker, Fighter turnDefender) {
-        this.turnAttacker = new Fighter(turnAttacker);
-        this.turnDefender = new Fighter(turnDefender);
+        this.turnAttacker = turnAttacker;
+        this.turnDefender = turnDefender;
 
         this.damage = 0;
         this.damageIgnore = 0;
@@ -50,15 +55,10 @@ public class TurnCalculator {
     }
 
     private void updateFighters(Integer realDamage) {
-        Integer attackerHp = hpAndRealDamageCalculator.getAttackerHp(
-                this.turnAttacker.getAttributes().getCurrentHp());
+        this.turnAttacker = fighterService.getUpdated(turnAttacker, 0);
+        this.turnDefender = fighterService.getUpdated(turnDefender, realDamage);
 
-        Integer defenderHp = hpAndRealDamageCalculator.getDefenderHp(
-                this.turnDefender.getAttributes().getCurrentHp(), realDamage);
-
-        this.turnAttacker.getAttributes().setCurrentHp(attackerHp);
-        this.turnDefender.getAttributes().setCurrentHp(defenderHp);
-//        System.out.printf("Остается у %s - %d, а у противника - %d\n\n", this.turnAttacker.getName(), attackerHp, defenderHp);
+//        System.out.printf("Остается у %s - %d, а у противника - %d\n\n", this.turnAttacker.getName(), this.turnAttacker.getAttributes().getCurrentHp(), this.turnDefender.getAttributes().getCurrentHp());
     }
 
     private Boolean getHit() {
@@ -79,7 +79,7 @@ public class TurnCalculator {
         this.damageIgnore = throwValue.throwDamageIgnore(this.turnDefender.getAttributes().getMinDamageIgnore(),
                 this.turnDefender.getAttributes().getMaxDamageIgnore());
 
-        this.realDamage = hpAndRealDamageCalculator.getRealDamage(this.damage, this.damageIgnore, 0);
+        this.realDamage = realDamageCalculator.getRealDamage(this.damage, this.damageIgnore, 0);
 //        System.out.printf("Наносится урона %d, игнорируется %d, всего %d\n", this.damage, this.damageIgnore, this.realDamage);
     }
 }

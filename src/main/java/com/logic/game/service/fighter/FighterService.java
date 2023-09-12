@@ -2,6 +2,7 @@ package com.logic.game.service.fighter;
 
 import com.logic.game.model.db.Enemy;
 import com.logic.game.model.db.Hero;
+import com.logic.game.model.fighter.Characteristics;
 import com.logic.game.model.fighter.Fighter;
 import com.logic.game.service.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +13,32 @@ import org.springframework.stereotype.Component;
 public class FighterService {
 
     private final RestClient restClient;
-    private final CurrentFighterCalculator currentFighterCalculator;
+    private final FighterCalculator fighterCalculator;
 
     @Autowired
     public FighterService(RestClient restClient,
-                          CurrentFighterCalculator currentFighterCalculator) {
+                          FighterCalculator fighterCalculator) {
         this.restClient = restClient;
-        this.currentFighterCalculator = currentFighterCalculator;
+        this.fighterCalculator = fighterCalculator;
     }
 
-    public Fighter getFighterFromHero(Long id) {
+    public Fighter getFromHero(Long id) {
         ResponseEntity<Hero> response = restClient.getHeroById(id);
         Hero hero = response.getBody();
-        return currentFighterCalculator.mapFighter(hero);
+        return fighterCalculator.map(hero);
     }
 
-    public Fighter getRandomFighterFromEnemy() {
+    public Fighter getRandomFromEnemy() {
         ResponseEntity<Enemy> response = restClient.getRandomEnemy();
         Enemy enemy = response.getBody();
-        return currentFighterCalculator.mapFighter(enemy);
+        return fighterCalculator.map(enemy);
+    }
+
+    public Fighter getUpdated(Fighter fighter, Integer realDamage){
+        return fighterCalculator.update(fighter, realDamage);
+    }
+
+    public Fighter getByCharacteristics(Fighter fighter, Characteristics characteristics){
+        return fighterCalculator.getByCharacteristics(fighter, characteristics);
     }
 }

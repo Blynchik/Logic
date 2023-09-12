@@ -45,4 +45,14 @@ public class Fighter {
         this.description = fighter.getDescription();
         this.isAttacker = fighter.getIsAttacker();
     }
+
+    public Fighter (Fighter fighter, Characteristics characteristics, Attributes attributes){
+        this.name = fighter.getName();
+        this.surname = fighter.getSurname();
+        this.appUser = fighter.getAppUser();
+        this.characteristics = characteristics;
+        this.attributes = attributes;
+        this.description = fighter.getDescription();
+        this.isAttacker = fighter.getIsAttacker();
+    }
 }

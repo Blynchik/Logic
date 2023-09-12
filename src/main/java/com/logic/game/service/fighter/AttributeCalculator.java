@@ -3,7 +3,10 @@ package com.logic.game.service.fighter;
 import com.logic.game.model.db.Enemy;
 import com.logic.game.model.db.Hero;
 import com.logic.game.model.fighter.Attributes;
+import com.logic.game.model.fighter.Characteristics;
+import com.logic.game.model.fighter.Fighter;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Attr;
 
 @Component
 public class AttributeCalculator {
@@ -39,6 +42,54 @@ public class AttributeCalculator {
                 getXpAward());
     }
 
+    public Attributes getAttributes(Fighter fighter){
+        return new Attributes(getMinAttack(fighter.getCharacteristics().getDexterity()),
+                getMaxAttack(fighter.getCharacteristics().getDexterity()),
+                getMinEvasion(fighter.getCharacteristics().getDexterity()),
+                getMaxEvasion(fighter.getCharacteristics().getDexterity()),
+                getMinDamageIgnore(fighter.getCharacteristics().getConstitution()),
+                getMaxDamageIgnore(fighter.getCharacteristics().getConstitution()),
+                getMinInitiative(fighter.getCharacteristics().getDexterity()),
+                getMaxInitiative(fighter.getCharacteristics().getDexterity()),
+                getMinDamage(fighter.getCharacteristics().getStrength()),
+                getMaxDamage(fighter.getCharacteristics().getStrength()),
+                getMaxHp(fighter.getCharacteristics().getConstitution()),
+                getCurrentHp(fighter.getAttributes().getCurrentHp(), fighter.getCharacteristics().getConstitution()),
+                getXpAward());
+    }
+
+    public Attributes getAttributes(Characteristics characteristics, Integer currentHp){
+        return new Attributes(getMinAttack(characteristics.getDexterity()),
+                getMaxAttack(characteristics.getDexterity()),
+                getMinEvasion(characteristics.getDexterity()),
+                getMaxEvasion(characteristics.getDexterity()),
+                getMinDamageIgnore(characteristics.getConstitution()),
+                getMaxDamageIgnore(characteristics.getConstitution()),
+                getMinInitiative(characteristics.getDexterity()),
+                getMaxInitiative(characteristics.getDexterity()),
+                getMinDamage(characteristics.getStrength()),
+                getMaxDamage(characteristics.getStrength()),
+                getMaxHp(characteristics.getConstitution()),
+                getCurrentHp(currentHp, characteristics.getConstitution()),
+                getXpAward());
+    }
+
+    public Attributes getUpdatedAttributes(Characteristics characteristics, Integer currentHp, Integer realDamage){
+        return new Attributes(getMinAttack(characteristics.getDexterity()),
+                getMaxAttack(characteristics.getDexterity()),
+                getMinEvasion(characteristics.getDexterity()),
+                getMaxEvasion(characteristics.getDexterity()),
+                getMinDamageIgnore(characteristics.getConstitution()),
+                getMaxDamageIgnore(characteristics.getConstitution()),
+                getMinInitiative(characteristics.getDexterity()),
+                getMaxInitiative(characteristics.getDexterity()),
+                getMinDamage(characteristics.getStrength()),
+                getMaxDamage(characteristics.getStrength()),
+                getMaxHp(characteristics.getConstitution()),
+                getCurrentHp(currentHp,realDamage, characteristics.getConstitution()),
+                getXpAward());
+    }
+
     private Integer getMinAttack(Integer dexterity) {
         return (int) (dexterity - Math.ceil(dexterity / 2.0));
     }
@@ -56,15 +107,15 @@ public class AttributeCalculator {
     }
 
     private Integer getMinDamageIgnore(Integer constitution) {
-        return 0;
+        return (int) (constitution - Math.ceil(constitution / 2.0));
     }
 
     private Integer getMaxDamageIgnore(Integer constitution) {
-        return (int) (Math.floor(constitution / 2.0));
+        return (int) (constitution + Math.floor(constitution / 2.0));
     }
 
     private Integer getMinInitiative(Integer dexterity) {
-        return 0;
+        return (int) (dexterity - Math.ceil(dexterity / 2.0));
     }
 
     private Integer getMaxInitiative(Integer dexterity) {
@@ -83,8 +134,15 @@ public class AttributeCalculator {
         return 2 * constitution;
     }
 
-    private Integer getCurrentHp(Integer currentHp, Integer constitution) {
+    private Integer getCurrentHp(Integer currentHp, Integer realDamage, Integer constitution) {
         if (currentHp == null) {
+            return getMaxHp(constitution);
+        }
+        return currentHp - realDamage;
+    }
+
+    private Integer getCurrentHp(Integer currentHp, Integer constitution){
+        if(currentHp == null){
             return getMaxHp(constitution);
         }
         return currentHp;

@@ -3,6 +3,7 @@ package com.logic.game.service.fighter;
 import com.logic.game.model.db.Enemy;
 import com.logic.game.model.db.Hero;
 import com.logic.game.model.fighter.Characteristics;
+import com.logic.game.model.fighter.Fighter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +18,12 @@ public class CharacteristicCalculator {
         return new Characteristics(getStrength(enemy.getStrength()),
                 getDexterity(enemy.getDexterity()),
                 getConstitution(enemy.getConstitution()));
+    }
+
+    public Characteristics getCharacteristics(Fighter fighter){
+        return new Characteristics(getStrength(fighter.getCharacteristics().getStrength()),
+                getDexterity(fighter.getCharacteristics().getDexterity()),
+                getConstitution(fighter.getCharacteristics().getConstitution()));
     }
 
     private Integer getStrength(Integer strength) {

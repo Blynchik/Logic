@@ -6,7 +6,6 @@ import com.logic.game.model.fight.Turn;
 import com.logic.game.model.fighter.Characteristics;
 import com.logic.game.model.fighter.Fighter;
 import com.logic.game.service.fight.FightService;
-import com.logic.game.service.fighter.CharacteristicCalculator;
 import com.logic.game.service.fighter.FighterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,20 +26,20 @@ public class TestController {
 
     @GetMapping("/hero/{id}")
     public ResponseEntity<Fighter> getHeroById(@PathVariable Long id) {
-        Fighter fighter = fighterService.getFighterFromHero(id);
+        Fighter fighter = fighterService.getFromHero(id);
         return ResponseEntity.ok(fighter);
     }
 
     @GetMapping("/enemy/random")
     public ResponseEntity<Fighter> getRandomEnemy() {
-        Fighter fighter = fighterService.getRandomFighterFromEnemy();
+        Fighter fighter = fighterService.getRandomFromEnemy();
         return ResponseEntity.ok(fighter);
     }
 
     @GetMapping("/fight")
     public ResponseEntity<Fight> getFight(@RequestParam Long heroId) {
-        Fighter fighter1 = fighterService.getFighterFromHero(heroId);
-        Fighter fighter2 = fighterService.getRandomFighterFromEnemy();
+        Fighter fighter1 = fighterService.getFromHero(heroId);
+        Fighter fighter2 = fighterService.getRandomFromEnemy();
         Fight fight = fightService.start(fighter1, fighter2);
 
         for (Round r : fight.getRounds()){
@@ -69,8 +68,8 @@ public class TestController {
         int wins = 0;
         int numRounds = 0;
 
-        Fighter baseFighter1 = fighterService.getFighterFromHero(1L);
-        Fighter baseFighter2 = fighterService.getRandomFighterFromEnemy();
+        Fighter baseFighter1 = fighterService.getFromHero(1L);
+        Fighter baseFighter2 = fighterService.getRandomFromEnemy();
 
         for (int i = 0; i < tests; i++) {
             Fighter fighter1 = new Fighter(baseFighter1);
@@ -89,10 +88,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
             Fighter fighter2 = new Fighter(baseFighter2);
-
-            fighter1.getCharacteristics().setStrength(fighter1.getCharacteristics().getStrength() + bonus);
 
             Fight fight = fightService.start(fighter1, fighter2);
 
@@ -107,11 +104,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5, 5 + bonus, 5));
             Fighter fighter2 = new Fighter(baseFighter2);
-
-
-            fighter1.getCharacteristics().setDexterity(fighter1.getCharacteristics().getDexterity() + bonus);
 
             Fight fight = fightService.start(fighter1, fighter2);
 
@@ -126,10 +120,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter(baseFighter1);
+            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5, 5, 5 + bonus));
             Fighter fighter2 = new Fighter(baseFighter2);
-
-            fighter1.getCharacteristics().setConstitution(fighter1.getCharacteristics().getConstitution() + bonus);
 
             Fight fight = fightService.start(fighter1, fighter2);
 
@@ -144,11 +136,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter(baseFighter1);
-            Fighter fighter2 = new Fighter(baseFighter2);
-
-            fighter1.getCharacteristics().setStrength(fighter1.getCharacteristics().getStrength() + bonus);
-            fighter1.getCharacteristics().setDexterity(fighter1.getCharacteristics().getDexterity() + bonus);
+            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
+            Fighter fighter2 = fighterService.getByCharacteristics(baseFighter2, new Characteristics(5, 5 + bonus, 5));
 
             Fight fight = fightService.start(fighter1, fighter2);
 
@@ -163,11 +152,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter(baseFighter1);
-            Fighter fighter2 = new Fighter(baseFighter2);
-
-            fighter1.getCharacteristics().setStrength(fighter1.getCharacteristics().getStrength() + bonus);
-            fighter1.getCharacteristics().setConstitution(fighter1.getCharacteristics().getConstitution() + bonus);
+            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5 + bonus, 5, 5));
+            Fighter fighter2 = fighterService.getByCharacteristics(baseFighter2, new Characteristics(5, 5, 5 + bonus));
 
             Fight fight = fightService.start(fighter1, fighter2);
 
@@ -182,11 +168,8 @@ public class TestController {
         numRounds = 0;
         wins = 0;
         for (int i = 0; i < tests; i++) {
-            Fighter fighter1 = new Fighter(baseFighter1);
-            Fighter fighter2 = new Fighter(baseFighter2);
-
-            fighter1.getCharacteristics().setDexterity(fighter1.getCharacteristics().getDexterity() + bonus);
-            fighter1.getCharacteristics().setConstitution(fighter1.getCharacteristics().getConstitution() + bonus);
+            Fighter fighter1 = fighterService.getByCharacteristics(baseFighter1, new Characteristics(5, 5 + bonus, 5));
+            Fighter fighter2 = fighterService.getByCharacteristics(baseFighter2, new Characteristics(5 , 5, 5 + bonus));
 
             Fight fight = fightService.start(fighter1, fighter2);
 

@@ -74,7 +74,7 @@ public class RoundCalculator {
             }
             attacker.setIsAttacker(true);
             defender.setIsAttacker(false);
-            //        System.out.printf("Атакующий %s, защищающийся %s\n", attacker.getName(), defender.getName());
+//                    System.out.printf("Атакующий %s, защищающийся %s\n", attacker.getName(), defender.getName());
         } while (this.attackerInitiative.equals(this.defenderInitiative));
 //        System.out.printf("Инициатива %s - %d, а %s - %d\n", fighter1.getName(), attackerInitiative, fighter2.getName(), defenderInitiative);
     }

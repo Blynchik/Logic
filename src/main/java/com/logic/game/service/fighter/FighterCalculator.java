@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CurrentFighterCalculator {
+public class FighterCalculator {
     private final CharacteristicCalculator characteristicCalculator;
     private final AttributeCalculator attributeCalculator;
 
     @Autowired
-    public CurrentFighterCalculator(CharacteristicCalculator characteristicCalculator,
-                                    AttributeCalculator attributeCalculator) {
+    public FighterCalculator(CharacteristicCalculator characteristicCalculator,
+                             AttributeCalculator attributeCalculator) {
         this.characteristicCalculator = characteristicCalculator;
         this.attributeCalculator = attributeCalculator;
     }
 
-    public Fighter mapFighter(Hero hero) {
+    public Fighter map(Hero hero) {
         Characteristics characteristics = characteristicCalculator.getCharacteristics(hero);
         Attributes attributes = attributeCalculator.getAttributes(hero);
         return new Fighter(hero.getName(),
@@ -30,12 +30,27 @@ public class CurrentFighterCalculator {
                 attributes);
     }
 
-    public Fighter mapFighter(Enemy enemy) {
+    public Fighter map(Enemy enemy) {
         Characteristics characteristics = characteristicCalculator.getCharacteristics(enemy);
         Attributes attributes = attributeCalculator.getAttributes(enemy);
         return new Fighter(enemy.getName(),
                 characteristics,
                 attributes,
                 enemy.getDescription());
+    }
+
+    public Fighter update(Fighter fighter, Integer realDamage) {
+        Characteristics characteristics = characteristicCalculator.getCharacteristics(fighter);
+        Attributes attributes = attributeCalculator.getUpdatedAttributes(characteristics, fighter.getAttributes().getCurrentHp(), realDamage);
+        return new Fighter(fighter,
+                characteristics,
+                attributes);
+    }
+
+    public Fighter getByCharacteristics(Fighter fighter, Characteristics characteristics){
+        Attributes attributes = attributeCalculator.getAttributes(characteristics, fighter.getAttributes().getCurrentHp());
+        return new Fighter(fighter,
+                characteristics,
+                attributes);
     }
 }
