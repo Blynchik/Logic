@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Класс RoundCalculator представляет утилиту для расчета раундов боя.
+ *
+ * @Component - аннотация Spring, указывающая, что класс является компонентом и должен быть управляем Spring-контейнером.
+ */
 @Component
 public class RoundCalculator {
 
@@ -20,6 +25,12 @@ public class RoundCalculator {
     private Integer attackerInitiative;
     private Integer defenderInitiative;
 
+    /**
+     * Конструктор класса RoundCalculator.
+     *
+     * @param turnCalculator - объект типа TurnCalculator, используемый для расчета ходов бойцов в раунде.
+     * @param throwValue - объект типа Throw, используемый для генерации случайных значений в рамках возможных.
+     */
     @Autowired
     public RoundCalculator(TurnCalculator turnCalculator,
                            Throw throwValue) {
@@ -27,6 +38,14 @@ public class RoundCalculator {
         this.throwValue = throwValue;
     }
 
+    /**
+     * Метод для расчета раунда боя между двумя бойцами.
+     *
+     * @param roundNum - номер текущего раунда.
+     * @param fighter1 - объект типа Fighter, представляющий первого бойца.
+     * @param fighter2 - объект типа Fighter, представляющий второго бойца.
+     * @return объект типа Round, содержащий результаты раунда.
+     */
     public Round calculate(Integer roundNum, Fighter fighter1, Fighter fighter2) {
         this.attacker = null;
         this.defender = null;
@@ -53,6 +72,12 @@ public class RoundCalculator {
                 turns);
     }
 
+    /**
+     * Приватный метод для определения инициативы бойцов.
+     *
+     * @param fighter1 - объект типа Fighter, представляющий первого бойца.
+     * @param fighter2 - объект типа Fighter, представляющий второго бойца.
+     */
     private void throwInitiative(Fighter fighter1, Fighter fighter2) {
         do {
             Integer fighter1Initiative = throwValue.throwInitiative(fighter1.getAttributes().getMinInitiative(),
@@ -79,11 +104,21 @@ public class RoundCalculator {
 //        System.out.printf("Инициатива %s - %d, а %s - %d\n", fighter1.getName(), attackerInitiative, fighter2.getName(), defenderInitiative);
     }
 
+    /**
+     * Приватный метод для обновления бойцов после хода атакующего.
+     *
+     * @param turn - объект типа Turn, представляющий первый ход в раунде.
+     */
     private void firstTurnUpdate(Turn turn) {
         this.attacker = turn.getTurnAttacker();
         this.defender = turn.getTurnDefender();
     }
 
+    /**
+     * Приватный метод для обновления бойцов после хода защищающегося.
+     *
+     * @param turn - объект типа Turn, представляющий второй ход в раунде.
+     */
     private void secondTurnUpdate(Turn turn) {
         this.attacker = turn.getTurnDefender();
         this.defender = turn.getTurnAttacker();

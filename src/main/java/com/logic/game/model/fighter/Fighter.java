@@ -4,6 +4,11 @@ import com.logic.game.model.db.AppUser;
 import lombok.Data;
 
 
+/**
+ * Класс Fighter представляет сущность бойца.
+ *
+ * @Data - аннотация Lombok, которая автоматически генерирует геттеры, сеттеры, toString, equals и hashCode.
+ */
 @Data
 public class Fighter {
     private String name;
@@ -15,12 +20,23 @@ public class Fighter {
     private Boolean isAttacker;
     private Integer currentHp;
 
+    /**
+     * Конструктор класса Fighter с параметрами.
+     * Использован при мапинге героя в бойца.
+     *
+     * @param name            - имя бойца типа String
+     * @param surname         - фамилия бойца типа String
+     * @param appUser         - пользователь, которому принадлежит боец типа AppUser
+     * @param characteristics - характеристики бойца типа Characteristics
+     * @param attributes      - атрибуты бойца типа Attributes
+     * @param currentHp       - текущее количество очков здоровья бойца типа Integer
+     */
     public Fighter(String name,
                    String surname,
                    AppUser appUser,
                    Characteristics characteristics,
                    Attributes attributes,
-                   Integer currentHp){
+                   Integer currentHp) {
         this.name = name;
         this.surname = surname;
         this.appUser = appUser;
@@ -29,11 +45,21 @@ public class Fighter {
         this.currentHp = currentHp;
     }
 
+    /**
+     * Конструктор класса Fighter с параметрами.
+     * Использован при мапинге противника в бойца.
+     *
+     * @param name            - имя бойца типа String
+     * @param characteristics - характеристики бойца типа Characteristics
+     * @param attributes      - атрибуты бойца типа Attributes
+     * @param description     - описание бойца типа String
+     * @param currentHp       - текущее количество очков здоровья бойца типа Integer
+     */
     public Fighter(String name,
                    Characteristics characteristics,
                    Attributes attributes,
                    String description,
-                   Integer currentHp){
+                   Integer currentHp) {
         this.name = name;
         this.characteristics = characteristics;
         this.attributes = attributes;
@@ -41,7 +67,12 @@ public class Fighter {
         this.currentHp = currentHp;
     }
 
-    public Fighter(Fighter fighter){
+    /**
+     * Конструктор класса Fighter с параметром типа Fighter.
+     * Использован при копировании бойца.
+     * @param fighter - объект класса Fighter
+     */
+    public Fighter(Fighter fighter) {
         this.name = fighter.getName();
         this.surname = fighter.getSurname();
         this.appUser = fighter.getAppUser();
@@ -52,10 +83,19 @@ public class Fighter {
         this.currentHp = fighter.getCurrentHp();
     }
 
-    public Fighter (Fighter fighter,
-                    Characteristics characteristics,
-                    Attributes attributes,
-                    Integer currentHp){
+    /**
+     * Конструктор класса Fighter с параметрами.
+     * Использован при обновлении хп бойца.
+     *
+     * @param fighter - объект класса Fighter
+     * @param characteristics - характеристики бойца типа Characteristics
+     * @param attributes - атрибуты бойца типа Attributes
+     * @param currentHp - текущее количество очков здоровья бойца типа Integer
+     */
+    public Fighter(Fighter fighter,
+                   Characteristics characteristics,
+                   Attributes attributes,
+                   Integer currentHp) {
         this.name = fighter.getName();
         this.surname = fighter.getSurname();
         this.appUser = fighter.getAppUser();
@@ -66,9 +106,17 @@ public class Fighter {
         this.currentHp = currentHp;
     }
 
+    /**
+     * Конструктор класса Fighter с параметрами.
+     * Использован при обновлении характеристик и атрибутов бойца.
+     *
+     * @param fighter - объект класса Fighter
+     * @param characteristics - характеристики бойца типа Characteristics
+     * @param attributes - атрибуты бойца типа Attributes
+     */
     public Fighter(Fighter fighter,
                    Characteristics characteristics,
-                   Attributes attributes){
+                   Attributes attributes) {
         this.name = fighter.getName();
         this.surname = fighter.getSurname();
         this.appUser = fighter.getAppUser();

@@ -4,6 +4,12 @@ import com.logic.game.model.fighter.Fighter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Класс Turn представляет информацию о ходе в рамках раунда боя.
+ *
+ * @Data - аннотация Lombok, которая автоматически генерирует геттеры, сеттеры, toString, equals и hashCode.
+ * @AllArgsConstructor - аннотация Lombok, которая автоматически генерирует конструктор со всеми аргументами.
+ */
 @Data
 @AllArgsConstructor
 public class Turn {

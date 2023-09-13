@@ -6,6 +6,12 @@ import lombok.Data;
 
 import java.util.Queue;
 
+/**
+ * Класс Fight представляет информацию о бое между двумя бойцами.
+ *
+ * @Data - аннотация Lombok, которая автоматически генерирует геттеры, сеттеры, toString, equals и hashCode.
+ * @AllArgsConstructor - аннотация Lombok, которая автоматически генерирует конструктор со всеми аргументами.
+ */
 @Data
 @AllArgsConstructor
 public class Fight {

@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Класс FightCalculator представляет утилиту для расчета и проведения боя между двумя бойцами.
+ *
+ * @Component - аннотация Spring, указывающая, что класс является компонентом и должен быть управляем Spring-контейнером.
+ */
 @Component
 public class FightCalculator {
     private final RoundCalculator roundCalculator;
@@ -17,11 +22,23 @@ public class FightCalculator {
     private Fighter winner;
     private Fighter loser;
 
+    /**
+     * Конструктор класса FightCalculator.
+     *
+     * @param roundCalculator - объект типа RoundCalculator, используемый для расчета раундов боя.
+     */
     @Autowired
     public FightCalculator(RoundCalculator roundCalculator) {
         this.roundCalculator = roundCalculator;
     }
 
+    /**
+     * Метод для расчета и проведения боя между двумя бойцами.
+     *
+     * @param fighter1 - объект типа Fighter, представляющий первого бойца.
+     * @param fighter2 - объект типа Fighter, представляющий второго бойца.
+     * @return объект типа Fight, содержащий результаты боя.
+     */
     public Fight calculate(Fighter fighter1, Fighter fighter2) {
         this.currentFighter1 = fighter1;
         this.currentFighter2 = fighter2;
@@ -47,6 +64,11 @@ public class FightCalculator {
                 this.loser);
     }
 
+    /**
+     * Приватный метод для обновления текущих бойцов после каждого раунда.
+     *
+     * @param round - объект типа Round, представляющий текущий раунд боя.
+     */
     private void updateFighters(Round round) {
         if (round.getAttacker().getIsAttacker().equals(this.currentFighter1.getIsAttacker())) {
             this.currentFighter1 = round.getAttacker();
@@ -57,6 +79,9 @@ public class FightCalculator {
         }
     }
 
+    /**
+     * Приватный метод для определения победителя и проигравшего после окончания боя.
+     */
     private void getWinnerAndLoser() {
         if (this.currentFighter1.getCurrentHp() <= 0) {
             this.winner = this.currentFighter2;

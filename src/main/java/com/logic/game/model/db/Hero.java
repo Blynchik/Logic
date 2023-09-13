@@ -4,6 +4,11 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Класс Hero представляет сущность героя.
+ *
+ * @Data - аннотация Lombok, которая автоматически генерирует геттеры, сеттеры, toString, equals и hashCode.
+ */
 @Data
 public class Hero {
     private Long id;
