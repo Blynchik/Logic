@@ -42,7 +42,7 @@ public class TestController {
      * @return объект ResponseEntity, содержащий информацию о герое в формате JSON
      */
     @GetMapping("/hero/{id}")
-    public ResponseEntity<Fighter> getHeroById(@PathVariable Long id) {
+    public ResponseEntity<Fighter> getHeroById(@PathVariable Long id) throws Exception {
         Fighter fighter = fighterService.getFromHero(id);
         return ResponseEntity.ok(fighter);
     }
@@ -53,7 +53,7 @@ public class TestController {
      * @return объект ResponseEntity, содержащий информацию о случайном противнике в формате JSON
      */
     @GetMapping("/enemy/random")
-    public ResponseEntity<Fighter> getRandomEnemy() {
+    public ResponseEntity<Fighter> getRandomEnemy() throws Exception {
         Fighter fighter = fighterService.getRandomFromEnemy();
         return ResponseEntity.ok(fighter);
     }
@@ -65,7 +65,7 @@ public class TestController {
      * @return объект ResponseEntity, содержащий информацию о бое в формате JSON
      */
     @GetMapping("/fight")
-    public ResponseEntity<Fight> getFight(@RequestParam Long heroId) {
+    public ResponseEntity<Fight> getFight(@RequestParam Long heroId) throws Exception {
         Fighter fighter1 = fighterService.getFromHero(heroId);
         Fighter fighter2 = fighterService.getRandomFromEnemy();
         Fight fight = fightService.start(fighter1, fighter2);
@@ -100,7 +100,7 @@ public class TestController {
      */
     @GetMapping("/fight/statistic")
     public ResponseEntity<String> getStatistics(@RequestParam(defaultValue = "100000") Integer tests,
-                                                @RequestParam(defaultValue = "1") Integer bonus) {
+                                                @RequestParam(defaultValue = "1") Integer bonus) throws Exception {
         int wins = 0;
         int numRounds = 0;
 

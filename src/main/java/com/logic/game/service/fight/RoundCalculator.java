@@ -4,6 +4,7 @@ import com.logic.game.model.fight.Round;
 import com.logic.game.model.fight.Turn;
 import com.logic.game.model.fighter.Fighter;
 import com.logic.game.service.Throw;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import java.util.Queue;
  * @Component - аннотация Spring, указывающая, что класс является компонентом и должен быть управляем Spring-контейнером.
  */
 @Component
+@Getter
 public class RoundCalculator {
 
     private final TurnCalculator turnCalculator;
@@ -29,7 +31,7 @@ public class RoundCalculator {
      * Конструктор класса RoundCalculator.
      *
      * @param turnCalculator - объект типа TurnCalculator, используемый для расчета ходов бойцов в раунде.
-     * @param throwValue - объект типа Throw, используемый для генерации случайных значений в рамках возможных.
+     * @param throwValue     - объект типа Throw, используемый для генерации случайных значений в рамках возможных.
      */
     @Autowired
     public RoundCalculator(TurnCalculator turnCalculator,
@@ -78,7 +80,7 @@ public class RoundCalculator {
      * @param fighter1 - объект типа Fighter, представляющий первого бойца.
      * @param fighter2 - объект типа Fighter, представляющий второго бойца.
      */
-    private void throwInitiative(Fighter fighter1, Fighter fighter2) {
+    public void throwInitiative(Fighter fighter1, Fighter fighter2) {
         do {
             Integer fighter1Initiative = throwValue.throwInitiative(fighter1.getAttributes().getMinInitiative(),
                     fighter1.getAttributes().getMaxInitiative());
@@ -109,7 +111,7 @@ public class RoundCalculator {
      *
      * @param turn - объект типа Turn, представляющий первый ход в раунде.
      */
-    private void firstTurnUpdate(Turn turn) {
+    public void firstTurnUpdate(Turn turn) {
         this.attacker = turn.getTurnAttacker();
         this.defender = turn.getTurnDefender();
     }
@@ -119,7 +121,7 @@ public class RoundCalculator {
      *
      * @param turn - объект типа Turn, представляющий второй ход в раунде.
      */
-    private void secondTurnUpdate(Turn turn) {
+    public void secondTurnUpdate(Turn turn) {
         this.attacker = turn.getTurnDefender();
         this.defender = turn.getTurnAttacker();
     }

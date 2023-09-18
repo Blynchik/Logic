@@ -1,5 +1,6 @@
 package com.logic.game.model.db;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
@@ -9,6 +10,7 @@ import lombok.Data;
  * @Data - аннотация Lombok, которая автоматически генерирует геттеры, сеттеры, toString, equals и hashCode.
  */
 @Data
+@AllArgsConstructor
 public class AppUser {
     private Long id;
     private String username;

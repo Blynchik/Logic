@@ -5,6 +5,7 @@ import com.logic.game.model.db.Hero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -41,13 +42,12 @@ public class RestClient {
      * @param id - идентификатор героя типа Long.
      * @return объект типа ResponseEntity<Hero>, содержащий ответ от сервера.
      */
-    public ResponseEntity<Hero> getHeroById(Long id) {
-        ResponseEntity<Hero> response = null;
+    public ResponseEntity<Hero> getHeroById(Long id) throws Exception {
+        ResponseEntity<Hero> response;
         try {
             response = restTemplate.exchange(url + "/hero/" + id, HttpMethod.GET, null, Hero.class);
         } catch (Exception e) {
-            System.out.println(e.getClass());
-            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
         return response;
     }
@@ -57,13 +57,12 @@ public class RestClient {
      *
      * @return объект типа ResponseEntity<Enemy>, содержащий ответ от сервера.
      */
-    public ResponseEntity<Enemy> getRandomEnemy() {
-        ResponseEntity<Enemy> response = null;
+    public ResponseEntity<Enemy> getRandomEnemy() throws Exception {
+        ResponseEntity<Enemy> response;
         try {
             response = restTemplate.exchange(url + "/enemy/random", HttpMethod.GET, null, Enemy.class);
         } catch (Exception e) {
-            System.out.println(e.getClass());
-            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
         return response;
     }

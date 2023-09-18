@@ -69,7 +69,7 @@ public class FightCalculator {
      *
      * @param round - объект типа Round, представляющий текущий раунд боя.
      */
-    private void updateFighters(Round round) {
+    public void updateFighters(Round round) {
         if (round.getAttacker().getIsAttacker().equals(this.currentFighter1.getIsAttacker())) {
             this.currentFighter1 = round.getAttacker();
             this.currentFighter2 = round.getDefender();
@@ -82,7 +82,7 @@ public class FightCalculator {
     /**
      * Приватный метод для определения победителя и проигравшего после окончания боя.
      */
-    private void getWinnerAndLoser() {
+    public void getWinnerAndLoser() {
         if (this.currentFighter1.getCurrentHp() <= 0) {
             this.winner = this.currentFighter2;
             this.loser = this.currentFighter1;

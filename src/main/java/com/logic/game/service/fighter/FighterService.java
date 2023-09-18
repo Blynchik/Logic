@@ -38,7 +38,7 @@ public class FighterService {
      * @param id - идентификатор героя типа Long.
      * @return объект типа Fighter, представляющий бойца, полученного из героя.
      */
-    public Fighter getFromHero(Long id) {
+    public Fighter getFromHero(Long id) throws Exception {
         ResponseEntity<Hero> response = restClient.getHeroById(id);
         Hero hero = response.getBody();
         return fighterCalculator.map(hero);
@@ -49,7 +49,7 @@ public class FighterService {
      *
      * @return объект типа Fighter, представляющий бойца, полученного из противника.
      */
-    public Fighter getRandomFromEnemy() {
+    public Fighter getRandomFromEnemy() throws Exception {
         ResponseEntity<Enemy> response = restClient.getRandomEnemy();
         Enemy enemy = response.getBody();
         return fighterCalculator.map(enemy);

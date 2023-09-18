@@ -50,7 +50,7 @@ public class CharacteristicCalculator {
      * @param strength - целое число, представляющее силу бойца.
      * @return сила бойца.
      */
-    private Integer getStrength(Integer strength) {
+    public Integer getStrength(Integer strength) {
         return strength;
     }
 
@@ -60,7 +60,7 @@ public class CharacteristicCalculator {
      * @param dexterity - целое число, представляющее ловкость бойца.
      * @return ловкость бойца.
      */
-    private Integer getDexterity(Integer dexterity) {
+    public Integer getDexterity(Integer dexterity) {
         return dexterity;
     }
 
@@ -70,7 +70,7 @@ public class CharacteristicCalculator {
      * @param constitution - целое число, представляющее выносливость бойца.
      * @return выносливость бойца.
      */
-    private Integer getConstitution(Integer constitution) {
+    public Integer getConstitution(Integer constitution) {
         return constitution;
     }
 }

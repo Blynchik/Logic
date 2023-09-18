@@ -80,7 +80,7 @@ public class TurnCalculator {
      *
      * @param realDamage - объект типа Integer, представляющий фактический урон, нанесенный в данном ходе.
      */
-    private void updateFighters(Integer realDamage) {
+    public void updateFighters(Integer realDamage) {
         this.turnAttacker = updateHp(this.turnAttacker, 0);
         this.turnDefender = updateHp(this.turnDefender, realDamage);
 
@@ -95,7 +95,7 @@ public class TurnCalculator {
      * @param realDamage - объект типа Integer, представляющий фактический урон, нанесенный в данном ходе.
      * @return объект Fighter - копию с обновленным HP.
      */
-    private Fighter updateHp(Fighter fighter, Integer realDamage) {
+    public Fighter updateHp(Fighter fighter, Integer realDamage) {
         return fighterService.getWithUpdatedHp(fighter, realDamage);
     }
 
@@ -104,7 +104,7 @@ public class TurnCalculator {
      *
      * @return объект Boolean, отражающий было попадание или нет.
      */
-    private Boolean getHit() {
+    public Boolean getHit() {
         this.attack = throwValue.throwAttack(this.turnAttacker.getAttributes().getMinAttack(),
                 this.turnAttacker.getAttributes().getMaxAttack());
 
@@ -118,7 +118,7 @@ public class TurnCalculator {
     /**
      * Приватный метод для расчета нанесенного фактического урона.
      */
-    private void getRealDamage() {
+    public void getRealDamage() {
         this.damage = throwValue.throwDamage(this.turnAttacker.getAttributes().getMinDamage(),
                 this.turnAttacker.getAttributes().getMaxDamage());
 

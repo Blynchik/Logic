@@ -1,5 +1,6 @@
 package com.logic.game.model.db;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
  * @Data - аннотация Lombok, которая автоматически генерирует геттеры, сеттеры, toString, equals и hashCode.
  */
 @Data
+@AllArgsConstructor
 public class Hero {
     private Long id;
     private String name;

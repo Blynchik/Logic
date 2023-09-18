@@ -106,7 +106,7 @@ public class AttributeCalculator {
      * @param dexterity - целое число, представляющее ловкость бойца.
      * @return минимальное значение атаки бойца.
      */
-    private Integer getMinAttack(Integer dexterity) {
+    public Integer getMinAttack(Integer dexterity) {
         return (int) (dexterity - Math.ceil(dexterity / 2.0));
     }
 
@@ -116,7 +116,7 @@ public class AttributeCalculator {
      * @param dexterity - целое число, представляющее ловкость бойца.
      * @return максимальное значение атаки бойца.
      */
-    private Integer getMaxAttack(Integer dexterity) {
+    public Integer getMaxAttack(Integer dexterity) {
         return (int) (dexterity + Math.floor(dexterity / 2.0));
     }
 
@@ -126,7 +126,7 @@ public class AttributeCalculator {
      * @param dexterity - целое число, представляющее ловкость бойца.
      * @return минимальное значение уклонения бойца.
      */
-    private Integer getMinEvasion(Integer dexterity) {
+    public Integer getMinEvasion(Integer dexterity) {
         return (int) (dexterity - Math.ceil(dexterity / 2.0));
     }
 
@@ -136,7 +136,7 @@ public class AttributeCalculator {
      * @param dexterity - целое число, представляющее ловкость бойца.
      * @return максимальное значение уклонения бойца.
      */
-    private Integer getMaxEvasion(Integer dexterity) {
+    public Integer getMaxEvasion(Integer dexterity) {
         return (int) (dexterity + Math.floor(dexterity / 2.0));
     }
 
@@ -146,7 +146,7 @@ public class AttributeCalculator {
      * @param constitution - целое число, представляющее выносливость бойца.
      * @return минимальное значение игнорирования урона бойца.
      */
-    private Integer getMinDamageIgnore(Integer constitution) {
+    public Integer getMinDamageIgnore(Integer constitution) {
         return (int) (constitution - Math.ceil(constitution / 2.0));
     }
 
@@ -156,7 +156,7 @@ public class AttributeCalculator {
      * @param constitution - целое число, представляющее выносливость бойца.
      * @return максимальное значение игнорирования урона бойца.
      */
-    private Integer getMaxDamageIgnore(Integer constitution) {
+    public Integer getMaxDamageIgnore(Integer constitution) {
         return (int) (constitution + Math.floor(constitution / 2.0));
     }
 
@@ -166,7 +166,7 @@ public class AttributeCalculator {
      * @param dexterity - целое число, представляющее ловкость бойца.
      * @return минимальное значение инициативы бойца.
      */
-    private Integer getMinInitiative(Integer dexterity) {
+    public Integer getMinInitiative(Integer dexterity) {
         return (int) (dexterity - Math.ceil(dexterity / 2.0));
     }
 
@@ -176,7 +176,7 @@ public class AttributeCalculator {
      * @param dexterity - целое число, представляющее ловкость бойца.
      * @return максимальное значение инициативы бойца.
      */
-    private Integer getMaxInitiative(Integer dexterity) {
+    public Integer getMaxInitiative(Integer dexterity) {
         return (int) (dexterity + Math.floor(dexterity / 2.0));
     }
 
@@ -186,7 +186,7 @@ public class AttributeCalculator {
      * @param strength - целое число, представляющее силу бойца.
      * @return минимальное значение урона бойца.
      */
-    private Integer getMinDamage(Integer strength) {
+    public Integer getMinDamage(Integer strength) {
         return (int) (strength - Math.ceil(strength / 2.0));
     }
 
@@ -196,7 +196,7 @@ public class AttributeCalculator {
      * @param strength - целое число, представляющее силу бойца.
      * @return максимальное значение урона бойца.
      */
-    private Integer getMaxDamage(Integer strength) {
+    public Integer getMaxDamage(Integer strength) {
         return (int) (strength + Math.floor(strength / 2.0));
     }
 
@@ -206,7 +206,7 @@ public class AttributeCalculator {
      * @param constitution - целое число, представляющее выносливость бойца.
      * @return максимальное значение здоровья бойца.
      */
-    private Integer getMaxHp(Integer constitution) {
+    public Integer getMaxHp(Integer constitution) {
         return 2 * constitution;
     }
 
@@ -215,7 +215,7 @@ public class AttributeCalculator {
      *
      * @return награда опыта.
      */
-    private Integer getXpAward() {
+    public Integer getXpAward() {
         return 10;
     }
 }
